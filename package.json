@@ -1,0 +1,114 @@
+{
+    "name": "ipython-ide",
+    "displayName": "ipython IDE",
+    "description": "Enable cell mode in a integrated terminal with ipython",
+    "version": "1.0.0",
+    "publisher": "daducci",
+    "engines": {
+        "vscode": "^1.34.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "*",
+        "onLanguage:python"
+    ],
+    "main": "./extension",
+    "contributes": {
+        "configuration": {
+           "type": "object",
+            "title": "TypeScript configuration",
+            "properties": {
+                "ipythonIDE.pythonInterpreter": {
+                    "type": "string",
+                    "default": "ipython",
+                    "description": "Python interpreter to use in the terminal"
+                },
+                "ipythonIDE.keepFocusOnEditor": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "After code is sent, keep focus to the editor"
+                },
+                "ipythonIDE.advancePosition": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "If True, the cursor advances to the next line after sending the current line (when there is no selection)"
+                },
+                "ipythonIDE.textToPaste": {
+                    "type": "string",
+                    "default": "%paste -q",
+                    "description": "String to write for copying selections/cells through clipboard (if empty, text is directly pasted)"
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "extension.ipythonOpenTerminal",
+                "title": "[ipython IDE] Open terminal"
+            },
+            {
+                "command": "extension.ipythonChangeFolder",
+                "title": "[ipython IDE] Change folder"
+            },
+            {
+                "command": "extension.ipythonRunCode",
+                "title": "[ipython IDE] Run selection/line"
+            },
+            {
+                "command": "extension.ipythonRunCell",
+                "title": "[ipython IDE] Run cell"
+            },
+            {
+                "command": "extension.ipythonGoPrevCell",
+                "title": "[ipython IDE] Go to previous cell"
+            },
+            {
+                "command": "extension.ipythonGoNextCell",
+                "title": "[ipython IDE] Go to next cell"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "extension.ipythonOpenTerminal",
+                "key": "ctrl+f10",
+                "mac": "cmd+f10"
+            },
+            {
+                "command": "extension.ipythonChangeFolder",
+                "key": "ctrl+f9",
+                "mac": "cmd+f9"
+            },
+            {
+                "command": "extension.ipythonRunCode",
+                "key": "f9",
+                "mac": "f9",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "extension.ipythonRunCell",
+                "key": "ctrl+enter",
+                "mac": "ctrl+enter",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "extension.ipythonGoPrevCell",
+                "key": "ctrl+up",
+                "mac": "ctrl+up",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "extension.ipythonGoNextCell",
+                "key": "ctrl+down",
+                "mac": "ctrl+down",
+                "when": "editorTextFocus"
+            }
+        ]
+    },
+    "scripts": {
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "dependencies": {
+        "clipboardy": "^1.2.3"
+    }
+}
